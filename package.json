@@ -1,0 +1,34 @@
+{
+  "name": "react_skillbox",
+  "version": "1.0.0",
+  "description": "Project for courses",
+  "main": "index.js",
+  "scripts": {
+    "build:dev": "env NODE_ENV=development webpack --config webpack.config.js",
+    "build:prod": "env NODE_ENV=production webpack --config webpack.config.js",
+    "start": "env NODE_ENV=development webpack serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fratule/react_skillbox.git"
+  },
+  "author": "Ryzhov Mykyta<fratule@gmailcom>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fratule/react_skillbox/issues"
+  },
+  "homepage": "https://github.com/fratule/react_skillbox#readme",
+  "devDependencies": {
+    "html-webpack-plugin": "^4.5.0",
+    "ts-loader": "^8.0.11",
+    "typescript": "^4.1.2",
+    "webpack": "^5.6.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}

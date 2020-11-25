@@ -1,0 +1,12 @@
+# IDE
+.idea
+.code
+
+# Build dir
+dist/
+
+# Black hole
+node_modules/
+
+# Other
+.DS_Store

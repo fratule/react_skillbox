@@ -1,1 +1,1 @@
-react_skillbox
+# Project for courses
