@@ -20,14 +20,15 @@
   },
   "homepage": "https://github.com/fratule/react_skillbox#readme",
   "devDependencies": {
-    "html-webpack-plugin": "^4.5.0",
     "ts-loader": "^8.0.11",
     "typescript": "^4.1.2",
-    "webpack": "^5.6.0",
+    "webpack": "^5.7.0",
     "webpack-cli": "^4.2.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-node-externals": "^2.5.2"
   },
   "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   }
