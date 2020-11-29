@@ -1,4 +1,3 @@
-import path from 'path'
 import express from 'express'
 import ReactDOM from 'react-dom/server'
 import { indexTemplate } from './indexTemplate'
