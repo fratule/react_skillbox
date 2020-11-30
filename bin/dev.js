@@ -1,32 +1,72 @@
 const path = require('path')
-const webpack = require('webpack')
-const webpackConfig = require('../webpack.config')
+const express = require('express')
 const nodemon = require('nodemon')
+const webpack = require('webpack')
+const [
+  webpackClientConfig,
+  webpackServerConfig,
+] = require('../webpack.config')
+const webpackDevMiddleware = require('webpack-dev-middleware')
+const webpackHotMiddleware = require('webpack-hot-middleware')
 
-const compiler = webpack(webpackConfig)
+// HMR
+const hmrServer = express()
+const port = 3001
+const clientCompiler = webpack(webpackClientConfig)
 
-compiler.watch({}, (err, stats) => {
+hmrServer.use(
+  webpackDevMiddleware(clientCompiler, {
+    publicPath: webpackClientConfig.output.publicPath,
+    serverSideRender: true,
+    writeToDisk: true,
+    noInfo: true,
+    stats: 'errors-only',
+    watchOptions: {
+      ignore: /dist/,
+    },
+  }),
+)
+
+hmrServer.use(
+  webpackHotMiddleware(clientCompiler, {
+    path: '/static/__webpack_hmr',
+  }),
+)
+
+hmrServer.listen(port, () => {
+  console.log(`HMR server successfully started on ${port} port.`)
+})
+
+// Server
+const serverCompiler = webpack(webpackServerConfig)
+
+serverCompiler.run(err => {
   if (err) {
     console.error('Compilation failed: ', err.stack || err)
-
-    if (err.details) {
-      console.error('Compilation failed details: ', err.details)
-    }
-
     return
   }
-  console.log('Compilation was successfully')
+  console.log('Compilation started')
 
-  const info = stats.toJson()
+  serverCompiler.watch({}, (err, stats) => {
+    if (err) {
+      console.error('Compilation failed: ', err.stack || err)
+      return
+    }
+    console.log('Compilation was successfully')
 
-  if (stats.hasErrors()) console.error('Stats errors: ', info.errors)
-  if (stats.hasWarnings()) console.warn('Stats warinings: ', info.warnings)
+    const info = stats.toJson()
 
-  nodemon({
-    script: path.resolve(__dirname, '../dist/server/server.js'),
-    watch: [
-      path.resolve(__dirname, '../dist/server/'),
-      path.resolve(__dirname, '../dist/server/'),
-    ],
+    if (stats.hasErrors()) console.error('Stats errors: ', info.errors)
+    if (stats.hasWarnings()) console.warn('Stats warnings: ', info.warnings)
+
+    nodemon({
+      script: path.resolve(__dirname, '../dist/server/server.js'),
+      watch: [
+        path.resolve(__dirname, '../dist/server/'),
+        path.resolve(__dirname, '../dist/client/'),
+      ],
+    })
   })
 })
+
+

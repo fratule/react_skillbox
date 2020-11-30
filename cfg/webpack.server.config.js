@@ -14,13 +14,13 @@ module.exports = {
   resolve: {
     extensions: ['.json', '.js', '.jsx', '.ts', '.tsx'],
   },
-  externals: [nodeExternals()],
+  externals: [ nodeExternals() ],
   module: {
     rules: [
       {
         test: /\.[tj]sx?$/,
         use: [ 'ts-loader' ],
-      }
+      },
     ],
   },
   optimization: {
