@@ -5,7 +5,7 @@ import styles from './header.scss'
 function Header() {
   return (
     <header>
-      <h1 className={styles.example}>My first React component</h1>
+      <h1 className={styles.example}>Hello React</h1>
     </header>
   )
 }
