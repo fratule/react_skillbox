@@ -6,7 +6,7 @@
   "scripts": {
     "build:dev": "env NODE_ENV=development webpack --config webpack.config.js",
     "build:prod": "env NODE_ENV=production webpack --config webpack.config.js",
-    "start": "env NODE_ENV=development webpack serve",
+    "dev": "env NODE_ENV=development node ./bin/dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,15 +20,32 @@
   },
   "homepage": "https://github.com/fratule/react_skillbox#readme",
   "devDependencies": {
-    "html-webpack-plugin": "^4.5.0",
+    "@hot-loader/react-dom": "17.0.0",
+    "@types/jest": "^26.0.16",
+    "@typescript-eslint/eslint-plugin": "^4.8.2",
+    "@typescript-eslint/parser": "^4.8.2",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^5.0.1",
+    "eslint": "^7.14.0",
+    "eslint-plugin-react": "^7.21.5",
+    "jest": "^26.6.3",
+    "react-hot-loader": "^4.13.0",
+    "sass": "^1.30.0",
+    "sass-loader": "^10.1.0",
+    "style-loader": "^2.0.0",
+    "ts-jest": "^26.4.4",
     "ts-loader": "^8.0.11",
     "typescript": "^4.1.2",
-    "webpack": "^5.6.0",
+    "webpack": "4.44.2",
     "webpack-cli": "^4.2.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-middleware": "3.7.2",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-node-externals": "^2.5.2"
   },
   "dependencies": {
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6",
+    "react": "17.0.0",
+    "react-dom": "17.0.0"
   }
 }
