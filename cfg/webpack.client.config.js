@@ -7,7 +7,7 @@ const IS_DEV = NODE_ENV === 'development'
 const IS_PROD = NODE_ENV === 'production'
 
 /**
- * Get the correct devtoll settings
+ * Get the correct devtool settings
  *  - in prod false
  *  - in dev eval
  */
@@ -37,7 +37,24 @@ module.exports = {
     rules: [
       {
         test: /\.[tj]sx?$/,
-        use: ['ts-loader'],
+        use: [ 'ts-loader' ],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                mode: 'local',
+                localIdentName: '[name]_[local]_[hash:base64:5]',
+              },
+              sourceMap: IS_DEV,
+            },
+          },
+          'sass-loader',
+        ],
       },
     ],
   },
