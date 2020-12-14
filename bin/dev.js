@@ -40,33 +40,33 @@ hmrServer.listen(port, () => {
 // Server
 const serverCompiler = webpack(webpackServerConfig)
 
-serverCompiler.run(err => {
+serverCompiler.watch({}, (err, stats) => {
   if (err) {
     console.error('Compilation failed: ', err.stack || err)
     return
   }
-  console.log('Compilation started')
+  console.log('Compilation was successfully')
 
-  serverCompiler.watch({}, (err, stats) => {
-    if (err) {
-      console.error('Compilation failed: ', err.stack || err)
-      return
-    }
-    console.log('Compilation was successfully')
+  const info = stats.toJson()
 
-    const info = stats.toJson()
-
-    if (stats.hasErrors()) console.error('Stats errors: ', info.errors)
-    if (stats.hasWarnings()) console.warn('Stats warnings: ', info.warnings)
-
-    nodemon({
-      script: path.resolve(__dirname, '../dist/server/server.js'),
-      watch: [
-        path.resolve(__dirname, '../dist/server/'),
-        path.resolve(__dirname, '../dist/client/'),
-      ],
-    })
-  })
+  if (stats.hasErrors()) console.error('Stats errors: ', info.errors)
+  if (stats.hasWarnings()) console.warn('Stats warnings: ', info.warnings)
 })
 
-
+nodemon({
+  script: path.resolve(__dirname, '../dist/server/server.js'),
+  watch: [
+    path.resolve(__dirname, '../dist/server/'),
+    path.resolve(__dirname, '../dist/client/'),
+  ],
+})
+  .on('start', function () {
+    console.log('App has started')
+  })
+  .on('quit', function () {
+    console.log('App has quit')
+    process.exit()
+  })
+  .on('restart', function (files) {
+    console.log('App restarted due to: ', files)
+  })

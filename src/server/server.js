@@ -6,11 +6,11 @@ import Header from '../shared/Header'
 const app = express()
 const port = 3000
 
-app.use('/static', express.static('./dist/client'))
+app.use('/static/', express.static('./dist/client'))
 
 app.get('/', (req, res) => {
   res.send(
-    indexTemplate(ReactDOM.renderToString(Header()))
+    indexTemplate(ReactDOM.renderToString(Header())),
   )
 })
 

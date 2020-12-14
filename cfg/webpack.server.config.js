@@ -18,8 +18,24 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.[tj]sx?$/,
+        test: /\.[tj]sx?$/i,
         use: [ 'ts-loader' ],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                mode: 'local',
+                localIdentName: '[name]_[local]_[hash:base64:5]',
+                exportOnlyLocals: true,
+              },
+            },
+          },
+          'sass-loader',
+        ],
       },
     ],
   },
