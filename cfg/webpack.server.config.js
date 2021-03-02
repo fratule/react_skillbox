@@ -30,8 +30,8 @@ module.exports = {
               modules: {
                 mode: 'local',
                 localIdentName: '[name]_[local]_[hash:base64:5]',
-                exportOnlyLocals: true,
               },
+              onlyLocals: true,
             },
           },
           'sass-loader',
